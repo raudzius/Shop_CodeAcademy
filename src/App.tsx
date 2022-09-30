@@ -1,7 +1,6 @@
 import React from 'react';
+import SignInPage from './components/SignInPage';
 
-const App = () => (
-  <div className="App" />
-  );
+const App = () => <SignInPage />;
 
 export default App;
