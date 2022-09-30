@@ -17,12 +17,16 @@ import Copyright from './Copyright';
 const theme = createTheme();
 
 const SignInPage = () => {
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [remember, setRemember] = React.useState(true);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+      email,
+      password,
+      remember,
     });
   };
 
@@ -55,6 +59,8 @@ const SignInPage = () => {
               autoComplete="email"
               autoFocus
               variant="filled"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
               margin="normal"
@@ -66,11 +72,18 @@ const SignInPage = () => {
               id="password"
               autoComplete="current-password"
               variant="filled"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <FormControlLabel
-              control={
-                <CustomSizeCheckbox value="remember" color="primary" defaultChecked />
-              }
+              control={(
+                <CustomSizeCheckbox
+                  value="remember"
+                  color="primary"
+                  checked={remember}
+                  onChange={(e) => setRemember(e.target.checked)}
+                />
+              )}
               label="Remember me"
             />
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
