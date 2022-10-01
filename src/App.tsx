@@ -1,6 +1,6 @@
 import React from 'react';
-import SignInPage from './components/SignInPage';
+import CustomAutocomplete from './components/CustomAutocomplete';
 
-const App = () => <SignInPage />;
+const App = () => <CustomAutocomplete />;
 
 export default App;
