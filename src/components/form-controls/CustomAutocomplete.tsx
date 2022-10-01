@@ -1,11 +1,6 @@
 import { Autocomplete, TextField } from '@mui/material';
 import * as React from 'react';
 
-type Topic = {
-  id: string;
-  title: string;
-};
-
 const topics: Topic[] = [
   { id: '1', title: 'HTML' },
   { id: '2', title: 'CSS' },
