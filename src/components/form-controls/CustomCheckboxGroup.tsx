@@ -17,7 +17,7 @@ type CheckboxGroupProps = {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>, value: CheckboxOption[]) => void;
 };
 
-type MutateOptions = (currentValue: CheckboxOption[], checkboxValue: string) => CheckboxOption[];
+type MutateOptions = (value: CheckboxOption[], option: CheckboxOption) => CheckboxOption[];
 
 const CustomCheckboxGroup: React.FC<CheckboxGroupProps> = ({
   formLabel,
@@ -28,29 +28,22 @@ const CustomCheckboxGroup: React.FC<CheckboxGroupProps> = ({
 }) => {
   const selectedValues = value && value.map((option) => option.value);
 
-  const createAppendedValue: MutateOptions = (currentValue, checkboxValue) => {
-    const copy = [...currentValue];
-    const newOption = options.find((option) => option.value === checkboxValue);
-    if (newOption) {
-      copy.push(newOption);
-    }
-    return copy;
-  };
+  const createAppendedValue: MutateOptions = (currentValue, option) => [...currentValue, option];
 
-  const createReducedValue: MutateOptions = (currentValue, checkboxValue) => currentValue
-  .filter((option) => option.value !== checkboxValue);
+  const createReducedValue: MutateOptions = (currentValue, option) => currentValue
+  .filter((x) => x.value !== option.value);
 
   const handleRadioChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     checked: boolean,
-    checkboxValue: string,
+    option: CheckboxOption,
   ) => {
     const componentIsControlled = value && onChange;
 
     if (componentIsControlled) {
       const newValue: CheckboxOption[] = checked
-        ? createAppendedValue(value, checkboxValue)
-        : createReducedValue(value, checkboxValue);
+        ? createAppendedValue(value, option)
+        : createReducedValue(value, option);
       onChange(e, newValue);
     }
   };
@@ -69,7 +62,7 @@ const CustomCheckboxGroup: React.FC<CheckboxGroupProps> = ({
                 name={name}
                 value={option.value}
                 checked={selectedValues?.includes(option.value)}
-                onChange={(e, newChecked) => handleRadioChange(e, newChecked, option.value)}
+                onChange={(e, newChecked) => handleRadioChange(e, newChecked, option)}
               />
             )}
             label={option.label}
