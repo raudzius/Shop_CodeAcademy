@@ -3,7 +3,7 @@ import {
 } from '@mui/material';
 import React from 'react';
 
-type CheckboxOption = {
+export type CheckboxOption = {
   value: string;
   label: string;
   checked?: boolean;
