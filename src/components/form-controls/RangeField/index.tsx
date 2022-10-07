@@ -7,20 +7,24 @@ type RangeFieldProps = {
   max?: number;
 };
 
-type RangeInputBlurHandler = RangeInputProps['onBlur'];
+type Range = [number, number];
+
+const orderRangeASC = (range: Range) => range.sort((a, b) => a - b);
 
 const RangeField: React.FC<RangeFieldProps> = ({ min = 0, max = 100 }) => {
-  const [privateValue, setPrivateValue] = React.useState<[number, number]>([min, max]);
+  const [privateValue, setPrivateValue] = React.useState<Range>([min, max]);
   const [privateMin, privateMax] = privateValue;
 
   const valueInRange = (newValue: number) => newValue <= max && newValue >= min;
 
-  const handleMinValueChange: RangeInputBlurHandler = (e, newMinValue) => {
-    setPrivateValue([newMinValue, privateMax]);
+  const handleMinValueChange: RangeInputProps['onBlur'] = (e, newMinValue) => {
+    const newValue = orderRangeASC([newMinValue, privateMax]);
+    setPrivateValue(newValue);
   };
 
-  const handleMaxValueChange: RangeInputBlurHandler = (e, newMaxValue) => {
-    setPrivateValue([privateMin, newMaxValue]);
+  const handleMaxValueChange: RangeInputProps['onBlur'] = (e, newMaxValue) => {
+    const newValue = orderRangeASC([privateMin, newMaxValue]);
+    setPrivateValue(newValue);
   };
 
   return (
