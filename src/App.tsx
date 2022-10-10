@@ -1,11 +1,8 @@
-import { Container } from '@mui/material';
 import * as React from 'react';
-import RangeField from './components/form-controls/RangeField';
+import TestPage from './components/pages/TestPage';
 
 const App: React.FC = () => (
-  <Container sx={{ mt: 6 }}>
-    <RangeField />
-  </Container>
+  <TestPage />
 );
 
 export default App;
