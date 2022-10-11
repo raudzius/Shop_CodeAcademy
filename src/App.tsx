@@ -1,8 +1,6 @@
 import * as React from 'react';
-import TestPage from './components/pages/TestPage';
+import ShopPage from './components/pages/ShopPage';
 
-const App: React.FC = () => (
-  <TestPage />
-);
+const App: React.FC = () => <ShopPage />;
 
 export default App;
