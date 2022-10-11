@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Box, Toolbar, Typography } from '@mui/material';
 import CustomAppBar from './components/CustomAppBar';
-import SideBar from './components/SideBar';
+import CustomDrawerContainer from './components/CustomDrawerContainer';
 
 const drawerWidth = 240;
 
@@ -15,7 +15,7 @@ const ShopPage: React.FC = () => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CustomAppBar drawerWidth={drawerWidth} handleDrawerToggle={handleDrawerToggle} />
-      <SideBar
+      <CustomDrawerContainer
         drawerWidth={drawerWidth}
         mobileOpen={mobileOpen}
         handleDrawerToggle={handleDrawerToggle}

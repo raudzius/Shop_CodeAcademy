@@ -2,13 +2,17 @@ import { Box } from '@mui/material';
 import React from 'react';
 import CustomDrawer from './components/CustomDrawer';
 
-type SideBarProps = {
+type CustomDrawerContainerProps = {
   drawerWidth: number;
   mobileOpen: boolean;
   handleDrawerToggle: VoidFunction;
 };
 
-const SideBar: React.FC<SideBarProps> = ({ drawerWidth, mobileOpen, handleDrawerToggle }) => (
+const CustomDrawerContainer: React.FC<CustomDrawerContainerProps> = ({
+  drawerWidth,
+  mobileOpen,
+  handleDrawerToggle,
+}) => (
   <Box
     component="nav"
     sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
@@ -38,4 +42,4 @@ const SideBar: React.FC<SideBarProps> = ({ drawerWidth, mobileOpen, handleDrawer
   </Box>
 );
 
-export default SideBar;
+export default CustomDrawerContainer;
