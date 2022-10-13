@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Box,
-  Toolbar,
   List,
   Typography,
   Divider,
@@ -12,13 +11,12 @@ import {
   styled,
 } from '@mui/material';
 
-import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import ApplicationBar from './components/ApplicationBar';
 import Sidebar from './components/Sidebar';
+import ApplicationBar from './components/ApplicationBar';
 
 const drawerWidth = 240;
 
@@ -39,25 +37,11 @@ const ShopPage = () => {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <ApplicationBar position="fixed" open={open} drawerWidth={drawerWidth}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={drawerOpen}
-            edge="start"
-            sx={{
-              marginRight: 5,
-              ...(open && { display: 'none' }),
-            }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
-          </Typography>
-        </Toolbar>
-      </ApplicationBar>
+      <ApplicationBar
+        ApplicationBarContainerProps={{ drawerWidth }}
+        open={open}
+        drawerOpen={drawerOpen}
+      />
       <Sidebar variant="permanent" open={open} drawerWidth={drawerWidth}>
         <DrawerHeader>
           <IconButton onClick={drawerClose}>

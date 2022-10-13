@@ -1,6 +1,6 @@
 import { AppBar, AppBarProps, styled } from '@mui/material';
 
-type ApplicationBarProps = AppBarProps & {
+export type ApplicationBarContainerProps = AppBarProps & {
   open?: boolean;
   drawerWidth: number;
 };
@@ -8,7 +8,7 @@ type ApplicationBarProps = AppBarProps & {
 const propsForStyling = ['open', 'drawerWidth'];
 const shouldForwardProp = (propName: string) => !propsForStyling.includes(propName);
 
-const ApplicationBar = styled(AppBar, { shouldForwardProp })<ApplicationBarProps>(
+const ApplicationBarContainer = styled(AppBar, { shouldForwardProp })<ApplicationBarContainerProps>(
   ({ theme, open, drawerWidth }) => ({
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
@@ -26,4 +26,4 @@ const ApplicationBar = styled(AppBar, { shouldForwardProp })<ApplicationBarProps
   }),
 );
 
-export default ApplicationBar;
+export default ApplicationBarContainer;
