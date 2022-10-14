@@ -1,20 +1,33 @@
 import * as React from 'react';
-import {
- List, Divider, IconButton, ListItem, ListItemButton, ListItemText,
-} from '@mui/material';
-
+import { List, Divider, IconButton } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+
 import SidebarContainer, { type SidebarContainerProps } from './components/SidebarContainer';
 import DrawerHeader from '../DrawerHeader';
+import SidebarItem, { SidebarItemProps } from './components/SidebarItem';
+
+type MenuItemData = Pick<SidebarItemProps, 'text' | 'Icon'>;
 
 type SidebarProps = {
   SidebarContainerProps: Omit<SidebarContainerProps, 'open' | 'variant'>;
   open: boolean;
   drawerClose: VoidFunction;
 };
+
+const userMenuItemsData: MenuItemData[] = [
+  { text: 'Inbox', Icon: InboxIcon },
+  { text: 'Starred', Icon: MailIcon },
+  { text: 'Send email', Icon: InboxIcon },
+  { text: 'Drafts', Icon: MailIcon },
+];
+
+const adminMenuItemsData: MenuItemData[] = [
+  { text: 'All mail', Icon: InboxIcon },
+  { text: 'Trash', Icon: MailIcon },
+  { text: 'Spam', Icon: InboxIcon },
+];
 
 const Sidebar: React.FC<SidebarProps> = ({ SidebarContainerProps, open, drawerClose }) => (
   <SidebarContainer variant="permanent" open={open} {...SidebarContainerProps}>
@@ -25,52 +38,14 @@ const Sidebar: React.FC<SidebarProps> = ({ SidebarContainerProps, open, drawerCl
     </DrawerHeader>
     <Divider />
     <List>
-      {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-          <ListItemButton
-            sx={{
-              minHeight: 48,
-              justifyContent: open ? 'initial' : 'center',
-              px: 2.5,
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                minWidth: 0,
-                mr: open ? 3 : 'auto',
-                justifyContent: 'center',
-              }}
-            >
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-          </ListItemButton>
-        </ListItem>
+      {userMenuItemsData.map((menuItemData) => (
+        <SidebarItem {...menuItemData} open={open} />
       ))}
     </List>
     <Divider />
     <List>
-      {['All mail', 'Trash', 'Spam'].map((text, index) => (
-        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-          <ListItemButton
-            sx={{
-              minHeight: 48,
-              justifyContent: open ? 'initial' : 'center',
-              px: 2.5,
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                minWidth: 0,
-                mr: open ? 3 : 'auto',
-                justifyContent: 'center',
-              }}
-            >
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-          </ListItemButton>
-        </ListItem>
+      {adminMenuItemsData.map((menuItemData) => (
+        <SidebarItem {...menuItemData} open={open} />
       ))}
     </List>
   </SidebarContainer>
