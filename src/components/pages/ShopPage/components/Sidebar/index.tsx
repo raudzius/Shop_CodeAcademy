@@ -4,14 +4,13 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
-import SidebarContainer, { type SidebarContainerProps } from './components/SidebarContainer';
+import SidebarContainer from './components/SidebarContainer';
 import DrawerHeader from '../DrawerHeader';
 import SidebarItem, { SidebarItemProps } from './components/SidebarItem';
 
 type MenuItemData = Pick<SidebarItemProps, 'text' | 'Icon'>;
 
 type SidebarProps = {
-  SidebarContainerProps: Omit<SidebarContainerProps, 'open' | 'variant'>;
   open: boolean;
   drawerClose: VoidFunction;
 };
@@ -29,8 +28,8 @@ const adminMenuItemsData: MenuItemData[] = [
   { text: 'Spam', Icon: InboxIcon },
 ];
 
-const Sidebar: React.FC<SidebarProps> = ({ SidebarContainerProps, open, drawerClose }) => (
-  <SidebarContainer variant="permanent" open={open} {...SidebarContainerProps}>
+const Sidebar: React.FC<SidebarProps> = ({ open, drawerClose }) => (
+  <SidebarContainer variant="permanent" open={open}>
     <DrawerHeader>
       <IconButton onClick={drawerClose}>
         <ChevronLeftIcon />
