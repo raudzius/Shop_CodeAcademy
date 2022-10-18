@@ -4,7 +4,7 @@ export type ApplicationBarContainerProps = AppBarProps & {
   open?: boolean;
 };
 
-const propsForStyling = ['open', 'drawerWidth'];
+const propsForStyling = ['open'];
 const shouldForwardProp = (propName: string) => !propsForStyling.includes(propName);
 
 const ApplicationBarContainer = styled(AppBar, { shouldForwardProp })<ApplicationBarContainerProps>(
