@@ -2,7 +2,7 @@ import { createTheme } from '@mui/material';
 
 const baseTheme = createTheme({
   common: {
-    drawerWidth: 240,
+    drawerWidth: 320,
   },
 });
 

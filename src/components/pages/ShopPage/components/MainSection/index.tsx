@@ -1,17 +1,10 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import ApiService, { Cup } from '../../../../../services/api-service';
 import DrawerHeader from '../DrawerHeader';
+import ShopContext from '../../contexts/ShopContext';
 
 const MainSection = () => {
-  const [cups, setCups] = React.useState<Cup[]>([]);
-
-  React.useEffect(() => {
-    (async () => {
-      const fetchedCups = await ApiService.fetchMany('cups');
-      setCups(fetchedCups);
-    })();
-  }, []);
+  const { cups } = React.useContext(ShopContext);
 
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
