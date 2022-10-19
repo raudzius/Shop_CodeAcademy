@@ -9,7 +9,7 @@ const MainSection = () => {
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
       <DrawerHeader />
-      <Typography component="pre">{JSON.stringify(cups, null, 4)}</Typography>
+      <Typography sx={{ overflow: 'auto' }}>{JSON.stringify(cups, null, 4)}</Typography>
     </Box>
   );
 };

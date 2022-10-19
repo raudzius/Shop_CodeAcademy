@@ -19,7 +19,7 @@ const Sidebar: React.FC = () => {
   } = React.useContext(ShopContext);
 
   return (
-    <SidebarContainer variant="permanent" open={open}>
+    <SidebarContainer variant="temporary" open={open}>
       <DrawerHeader>
         <IconButton onClick={closeDrawer}>
           <ChevronLeftIcon />
