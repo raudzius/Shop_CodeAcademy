@@ -2,25 +2,10 @@ import config from '../config';
 
 const { serverAddress } = config;
 
-export type Cup = {
-  id: string,
-  title: string,
-  description: string,
-  images?: string[],
-  liked: boolean,
-  price: number,
-  categoryId: string,
-  materialTypeId: string,
-  colorId: string;
-};
-
-type Category = {};
-type Product = {};
-
 type CollectionNameToTypeMap = {
   cups: Cup[],
   categories: Category[];
-  products: Product[];
+  materialTypes: MaterialType[];
 };
 
 type CollectionName = keyof CollectionNameToTypeMap;

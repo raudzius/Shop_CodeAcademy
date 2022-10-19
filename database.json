@@ -11,7 +11,7 @@
         "https://m.media-amazon.com/images/I/61HiMJYWo-L._AC_SL1500_.jpg",
         "https://m.media-amazon.com/images/I/71IgBbGV6oL._AC_SL1280_.jpg"
       ],
-      "liked": false,
+
       "price": 4.99,
       "categoryId": "2",
       "materialTypeId": "1",
@@ -28,7 +28,6 @@
         "https://m.media-amazon.com/images/I/61HiMJYWo-L._AC_SL1500_.jpg",
         "https://m.media-amazon.com/images/I/71IgBbGV6oL._AC_SL1280_.jpg"
       ],
-      "liked": true,
       "price": 10.99,
       "categoryId": "1",
       "materialTypeId": "1",
@@ -45,7 +44,6 @@
         "https://m.media-amazon.com/images/I/61HiMJYWo-L._AC_SL1500_.jpg",
         "https://m.media-amazon.com/images/I/71IgBbGV6oL._AC_SL1280_.jpg"
       ],
-      "liked": true,
       "price": 19.99,
       "categoryId": "1",
       "materialTypeId": "2",
@@ -55,7 +53,6 @@
       "id": "5F7922A2-19DB-CAD4-4291-1B137C44D066",
       "title": "Kompoto slėptuvė",
       "description": "tellus sem mollis dui, in sodales elit erat vitae risus. Duis a mi fringilla mi lacinia mattis. Integer eu lacus. Quisque imperdiet, erat",
-      "liked": false,
       "price": 1.99,
       "categoryId": "2",
       "materialTypeId": "1",
@@ -66,7 +63,6 @@
       "title": "Šulinukas",
       "description": "Nullam vitae diam. Proin dolor. Nulla semper tellus id nunc interdum feugiat. Sed nec metus facilisis lorem tristique aliquet. Phasellus fermentum convallis ligula. Donec luctus aliquet odio. Etiam",
       "images": [],
-      "liked": false,
       "price": 8.99,
       "categoryId": "3",
       "materialTypeId": "2",
