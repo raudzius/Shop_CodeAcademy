@@ -7,7 +7,8 @@ const baseTheme = createTheme({
 });
 
 const {
-  transitions, common, breakpoints, spacing,
+  transitions,
+  common,
 } = baseTheme;
 
 const theme = createTheme(baseTheme, {
@@ -28,10 +29,7 @@ const theme = createTheme(baseTheme, {
           duration: transitions.duration.leavingScreen,
         }),
         overflowX: 'hidden',
-        width: `calc(${spacing(7)} + 1px)`,
-        [breakpoints.up('sm')]: {
-          width: `calc(${spacing(8)} + 1px)`,
-        },
+        width: 0,
       },
     },
   },
