@@ -1,14 +1,14 @@
-import { Box, Typography } from '@mui/material';
 import React from 'react';
-import cupService from '../../../../../services/cup-service';
+import { Box, Typography } from '@mui/material';
+import ApiService, { Cup } from '../../../../../services/api-service';
 import DrawerHeader from '../DrawerHeader';
 
 const MainSection = () => {
-  const [cups, setCups] = React.useState([]);
+  const [cups, setCups] = React.useState<Cup[]>([]);
 
   React.useEffect(() => {
     (async () => {
-      const fetchedCups = await cupService.fetchMany();
+      const fetchedCups = await ApiService.fetchMany('cups');
       setCups(fetchedCups);
     })();
   }, []);
