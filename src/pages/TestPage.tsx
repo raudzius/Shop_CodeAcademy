@@ -1,6 +1,6 @@
 import { Box, Container } from '@mui/material';
 import React from 'react';
-import RangeField from '../form-controls/RangeField';
+import RangeField from '../components/form-controls/RangeField';
 
 const TestPage: React.FC = () => {
   const [priceRange, setPriceRange] = React.useState<NumberRange>([175, 280]);

@@ -3,7 +3,6 @@ type Cup = {
   title: string,
   description: string,
   images: string[],
-  liked: boolean,
   price: number,
   categoryId: string,
   materialTypeId: string,

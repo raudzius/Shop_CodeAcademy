@@ -1,6 +1,6 @@
 import React from 'react';
-import ApiService from '../../../../services/api-service';
-import { CheckboxOption } from '../../../form-controls/CustomCheckboxGroup';
+import ApiService from '../../../services/api-service';
+import { CheckboxOption } from '../../../components/form-controls/CustomCheckboxGroup';
 
 type RangeFilter = {
   bounds: NumberRange;

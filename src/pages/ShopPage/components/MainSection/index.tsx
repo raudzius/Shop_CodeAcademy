@@ -1,9 +1,10 @@
 import React from 'react';
 import {
- Box, Divider, Grid, Paper, Typography,
+ Box, Divider, Grid, Typography,
 } from '@mui/material';
 import DrawerHeader from '../DrawerHeader';
 import ShopContext from '../../contexts/ShopContext';
+import CupCard from './components/CupCard';
 
 type MainSectionProps = {
   isExtendedLayout: boolean;
@@ -22,15 +23,20 @@ const MainSection: React.FC<MainSectionProps> = ({ isExtendedLayout }) => {
       })}
     >
       <DrawerHeader />
-      <Typography>All Products</Typography>
-      <Divider sx={{ my: 2 }} />
+      <Typography component="h1" variant="h5">
+        All Products
+      </Typography>
+      <Divider sx={{ my: 2, mb: 3 }} />
       <Grid container spacing={3} sx={{ alignItems: 'stretch' }}>
         {cups.map((cup) => (
-          <Grid key={cup.id} item xs={3}>
-            <Paper elevation={3} sx={{ p: 3 }}>
-              {JSON.stringify(cup, null, 4)}
-            </Paper>
-          </Grid>
+          <CupCard
+            key={cup.id}
+            id={cup.id}
+            title={cup.title}
+            description={cup.description}
+            images={cup.images}
+            price={cup.price}
+          />
         ))}
       </Grid>
     </Box>

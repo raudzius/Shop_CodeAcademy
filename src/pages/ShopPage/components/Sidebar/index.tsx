@@ -4,8 +4,8 @@ import SidebarContainer from './components/SidebarContainer';
 import DrawerHeader from '../DrawerHeader';
 import DrawerContext from '../../contexts/DrawerContext';
 import ShopContext from '../../contexts/ShopContext';
-import RangeField from '../../../../form-controls/RangeField';
-import CustomCheckboxGroup from '../../../../form-controls/CustomCheckboxGroup';
+import RangeField from '../../../../components/form-controls/RangeField';
+import CustomCheckboxGroup from '../../../../components/form-controls/CustomCheckboxGroup';
 
 type SidebarProps = {
   isExtendedLayout: boolean;

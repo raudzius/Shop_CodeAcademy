@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ShopPage from './components/pages/ShopPage';
+import ShopPage from './pages/ShopPage';
 
 const App: React.FC = () => <ShopPage />;
 
