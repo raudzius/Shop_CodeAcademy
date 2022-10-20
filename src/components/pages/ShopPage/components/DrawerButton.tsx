@@ -1,16 +1,16 @@
 import { IconButton } from '@mui/material';
 import React from 'react';
-import MenuIcon from '@mui/icons-material/Menu';
+import { ChevronLeft, Menu } from '@mui/icons-material';
 import DrawerContext from '../contexts/DrawerContext';
 
 const DrawerButton: React.FC = () => {
-  const { openDrawer } = React.useContext(DrawerContext);
+  const { open, toggleDrawer } = React.useContext(DrawerContext);
 
   return (
     <IconButton
       color="inherit"
       aria-label="open drawer"
-      onClick={openDrawer}
+      onClick={toggleDrawer}
       size="large"
       sx={{
         position: 'fixed',
@@ -18,14 +18,14 @@ const DrawerButton: React.FC = () => {
         right: 15,
         bgcolor: 'primary.main',
         borderRadius: 1,
+        color: 'common.white',
         ':hover': {
-          color: 'common.white',
           bgcolor: 'primary.dark',
         },
         zIndex: 'drawerButton',
       }}
     >
-      <MenuIcon />
+      {open ? <ChevronLeft /> : <Menu />}
     </IconButton>
   );
 };

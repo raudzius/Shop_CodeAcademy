@@ -1,19 +1,14 @@
 import { Drawer, styled } from '@mui/material';
 
-const SidebarContainer = styled(Drawer)(({ theme, open }) => {
-  const drawerMixin = theme.mixins.drawer[open ? 'openedMixin' : 'closedMixin'];
-
-  return {
-    width: theme.common.drawerWidth,
+const SidebarContainer = styled(Drawer)(({ theme }) => ({
     flexShrink: 0,
     whiteSpace: 'nowrap',
     boxSizing: 'border-box',
-    ...drawerMixin,
+    overflowX: 'hidden',
     '& .MuiDrawer-paper': {
       padding: theme.spacing(3, 2),
-      drawerMixin,
+      width: theme.common.drawerWidth,
     },
-  };
-});
+  }));
 
 export default SidebarContainer;
