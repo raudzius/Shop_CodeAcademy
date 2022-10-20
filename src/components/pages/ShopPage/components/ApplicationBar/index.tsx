@@ -1,20 +1,14 @@
 import * as React from 'react';
-import { Toolbar, Typography } from '@mui/material';
-import ApplicationBarContainer from './ApplicationBarContainer';
-import DrawerContext from '../../contexts/DrawerContext';
+import { AppBar, Toolbar, Typography } from '@mui/material';
 
-const ApplicationBar: React.FC = () => {
-  const { open } = React.useContext(DrawerContext);
-
-  return (
-    <ApplicationBarContainer position="fixed" open={open}>
-      <Toolbar>
-        <Typography variant="h6" noWrap component="div">
-          Mini variant drawer
-        </Typography>
-      </Toolbar>
-    </ApplicationBarContainer>
+const ApplicationBar: React.FC = () => (
+  <AppBar position="fixed">
+    <Toolbar>
+      <Typography variant="h6" noWrap component="div">
+        Mini variant drawer
+      </Typography>
+    </Toolbar>
+  </AppBar>
   );
-};
 
 export default ApplicationBar;

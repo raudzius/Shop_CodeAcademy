@@ -11,16 +11,18 @@ const DrawerButton: React.FC = () => {
       color="inherit"
       aria-label="open drawer"
       onClick={openDrawer}
+      size="large"
       sx={{
         position: 'fixed',
-        bottom: 20,
-        right: 20,
+        bottom: 15,
+        right: 15,
         bgcolor: 'primary.main',
         borderRadius: 1,
         ':hover': {
           color: 'common.white',
           bgcolor: 'primary.dark',
         },
+        zIndex: 'drawerButton',
       }}
     >
       <MenuIcon />

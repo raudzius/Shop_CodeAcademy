@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Divider, IconButton } from '@mui/material';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { Divider } from '@mui/material';
 import SidebarContainer from './components/SidebarContainer';
 import DrawerHeader from '../DrawerHeader';
 import DrawerContext from '../../contexts/DrawerContext';
@@ -9,7 +8,7 @@ import RangeField from '../../../../form-controls/RangeField';
 import CustomCheckboxGroup from '../../../../form-controls/CustomCheckboxGroup';
 
 const Sidebar: React.FC = () => {
-  const { open, closeDrawer } = React.useContext(DrawerContext);
+  const { open } = React.useContext(DrawerContext);
   const {
     filters: {
       price: priceFilter,
@@ -20,11 +19,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <SidebarContainer variant="temporary" open={open}>
-      <DrawerHeader>
-        <IconButton onClick={closeDrawer}>
-          <ChevronLeftIcon />
-        </IconButton>
-      </DrawerHeader>
+      <DrawerHeader />
       <RangeField
         min={priceFilter.bounds[0]}
         max={priceFilter.bounds[1]}

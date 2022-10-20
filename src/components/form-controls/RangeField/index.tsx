@@ -59,7 +59,7 @@ const RangeField: React.FC<RangeFieldProps> = ({
   }, [value]);
 
   return (
-    <Box sx={{ width: 300 }}>
+    <Box>
       <InputContainer>
         <RangeInput
           value={privateMin}
