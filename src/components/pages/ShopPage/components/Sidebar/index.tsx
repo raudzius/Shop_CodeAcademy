@@ -7,8 +7,13 @@ import ShopContext from '../../contexts/ShopContext';
 import RangeField from '../../../../form-controls/RangeField';
 import CustomCheckboxGroup from '../../../../form-controls/CustomCheckboxGroup';
 
-const Sidebar: React.FC = () => {
+type SidebarProps = {
+  isExtendedLayout: boolean;
+};
+
+const Sidebar: React.FC<SidebarProps> = ({ isExtendedLayout }) => {
   const { open } = React.useContext(DrawerContext);
+
   const {
     filters: {
       price: priceFilter,
@@ -18,7 +23,7 @@ const Sidebar: React.FC = () => {
   } = React.useContext(ShopContext);
 
   return (
-    <SidebarContainer variant="temporary" open={open}>
+    <SidebarContainer variant={isExtendedLayout ? 'permanent' : 'temporary'} open={open}>
       <DrawerHeader />
       <RangeField
         min={priceFilter.bounds[0]}
