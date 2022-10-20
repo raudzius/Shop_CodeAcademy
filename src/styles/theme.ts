@@ -1,12 +1,15 @@
 import { createTheme } from '@mui/material';
 
-const baseTheme = createTheme({
+const theme = createTheme({
   common: {
-    drawerWidth: 297,
+    drawerWidth: {
+      xs: 297,
+      sm: 320,
+      md: 340,
+      lg: 360,
+      xl: 460,
+    },
   },
-});
-
-const theme = createTheme(baseTheme, {
   zIndex: {
     drawer: 1100,
     drawerButton: 1150,
