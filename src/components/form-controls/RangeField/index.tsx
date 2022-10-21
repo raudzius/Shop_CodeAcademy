@@ -1,4 +1,5 @@
 import { Box, Slider, Typography } from '@mui/material';
+import useMounted from 'hooks/useMounted';
 import * as React from 'react';
 import FieldLabel from '../FieldLabel';
 import { RangeInput, InputContainer, RangeInputProps } from './components';
@@ -27,6 +28,7 @@ const RangeField: React.FC<RangeFieldProps> = ({
   value = DEFAULT_RANGE,
   onChangeCommitted,
 }) => {
+  const isMounted = useMounted();
   const [bounds, setBounds] = React.useState<NumberRange>(DEFAULT_RANGE);
   const [privateValue, setPrivateValue] = React.useState<NumberRange>(DEFAULT_RANGE);
   const [privateMin, privateMax] = privateValue;
@@ -53,13 +55,22 @@ const RangeField: React.FC<RangeFieldProps> = ({
   React.useEffect(() => {
     const initialBounds = calcInitialBounds();
     const initialPrivateValue = orderRangeASC(value) || initialBounds;
+
     setBounds(initialBounds);
     setPrivateValue(initialPrivateValue);
   }, []);
 
   React.useEffect(() => {
-    setPrivateValue(value);
+    if (isMounted) {
+      setPrivateValue(value);
+    }
   }, [value]);
+
+  React.useEffect(() => {
+    if (isMounted) {
+      setBounds([min ?? lowerBound, max ?? higherBound]);
+    }
+  }, [min, max]);
 
   return (
     <Box>
