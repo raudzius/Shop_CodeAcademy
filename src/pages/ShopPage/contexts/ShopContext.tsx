@@ -58,7 +58,10 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
     fetchOptions: fetchMaterialTypeOptions,
   });
 
-  const [priceRange, setPriceRange, priceBounds] = useRangeField();
+  const [priceRange, setPriceRange, priceBounds] = useRangeField({
+    urlParamName: 'price',
+    fetchRange: ApiService.fetchCupPriceRange,
+  });
 
   const shopContextValue: ShopContextValue = React.useMemo(
     () => ({
