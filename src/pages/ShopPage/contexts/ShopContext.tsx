@@ -10,22 +10,16 @@ type RangeFilter = {
   onChangeCommitted: (newRange: NumberRange) => void;
 };
 
-type CheckboxFilter = {
-  options: CheckboxOption[];
-  selectedOptions: CheckboxOption[];
-  urlParamName: string;
-  onChange: (newSelectedOptions: CheckboxOption[]) => void;
-};
-
-type Filters = {
-  price: RangeFilter;
-  materialTypes: CheckboxFilter;
-};
-
 type ShopContextValue = {
   cups: Cup[];
-  filters: Filters & {
+  filters: {
+    price: RangeFilter;
     categories: {
+      options: CheckboxOption[];
+      selectedOptions: CheckboxOption[];
+      onChange: (newSelectedOptions: CheckboxOption[]) => void;
+    };
+    materialTypes: {
       options: CheckboxOption[];
       selectedOptions: CheckboxOption[];
       onChange: (newSelectedOptions: CheckboxOption[]) => void;
@@ -42,42 +36,41 @@ const fetchCategoryOptions = async () => {
   }));
 };
 
+const fetchMaterialTypeOptions = async () => {
+  const fetchedCategories = await ApiService.fetchMany('materialTypes');
+
+  return fetchedCategories.map(({ id, title }) => ({
+    value: id,
+    label: title,
+  }));
+};
+
 const ShopContext = React.createContext({} as ShopContextValue);
 
 export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cups, setCups] = React.useState<Cup[]>([]);
-  const [selectedCategories, setSelectedCategories, categoriesOptions] = useCheckboxFilter({
+
+  const [categories, setCategories, categoriesOptions] = useCheckboxFilter({
     urlParamName: 'categories',
     fetchOptions: fetchCategoryOptions,
   });
-  const [filters, setFilters] = React.useState<Filters>({
-    price: {
-      bounds: [0, 0],
-      currentRange: [0, 0],
-      urlParamName: 'price',
-      onChangeCommitted: (newCurrentRange) => {
-        setFilters((currentFilters) => ({
-          ...currentFilters,
-          price: {
-            ...currentFilters.price,
-            currentRange: newCurrentRange,
-          },
-        }));
-      },
-    },
-    materialTypes: {
-      options: [],
-      selectedOptions: [],
+
+  const [materialTypes, setMaterialTypes, materialTypesOptions] = useCheckboxFilter(
+    {
       urlParamName: 'materialTypes',
-      onChange: (newSelectedOptions: CheckboxOption[]) => {
-        setFilters((currentFilters) => ({
-          ...currentFilters,
-          materialTypes: {
-            ...currentFilters.materialTypes,
-            selectedOptions: newSelectedOptions,
-          },
-        }));
-      },
+      fetchOptions: fetchMaterialTypeOptions,
+    },
+  );
+
+  const [priceFilter, setPriceFilter] = React.useState<RangeFilter>({
+    bounds: [0, 0],
+    currentRange: [0, 0],
+    urlParamName: 'price',
+    onChangeCommitted: (newCurrentRange) => {
+      setPriceFilter((currentPriceFilter) => ({
+        ...currentPriceFilter,
+        currentRange: newCurrentRange,
+      }));
     },
   });
 
@@ -85,43 +78,34 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
     () => ({
       cups,
       filters: {
-        ...filters,
+        price: priceFilter,
         categories: {
           options: categoriesOptions,
-          selectedOptions: selectedCategories,
-          onChange: setSelectedCategories,
+          selectedOptions: categories,
+          onChange: setCategories,
+        },
+        materialTypes: {
+          options: materialTypesOptions,
+          selectedOptions: materialTypes,
+          onChange: setMaterialTypes,
         },
       },
     }),
-    [cups, filters, selectedCategories],
+    [cups, priceFilter, categories, materialTypes],
   );
 
   React.useEffect(() => {
     (async () => {
-      const [fetchedCups, fetchedMaterialTypes] = await Promise.all([
-        ApiService.fetchMany('cups'),
-        ApiService.fetchMany('materialTypes'),
-      ]);
+      const fetchedCups = await ApiService.fetchMany('cups');
 
       const priceArray = fetchedCups.map((cup) => cup.price).sort((a, b) => a - b);
       const priceRange: NumberRange = [priceArray[0], priceArray[priceArray.length - 1]];
 
-      const materialTypesOptions = fetchedMaterialTypes.map(({ id, title }) => ({
-        value: id,
-        label: title,
-      }));
-
       setCups(fetchedCups);
-      setFilters({
-        price: {
-          ...filters.price,
-          bounds: priceRange,
-          currentRange: priceRange,
-        },
-        materialTypes: {
-          ...filters.materialTypes,
-          options: materialTypesOptions,
-        },
+      setPriceFilter({
+        ...priceFilter,
+        bounds: priceRange,
+        currentRange: priceRange,
       });
     })();
   }, []);
