@@ -26,6 +26,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isExtendedLayout }) => {
     <SidebarContainer variant={isExtendedLayout ? 'permanent' : 'temporary'} open={open}>
       <DrawerHeader />
       <RangeField
+        label="Price"
         min={priceFilter.bounds[0]}
         max={priceFilter.bounds[1]}
         value={priceFilter.currentRange}

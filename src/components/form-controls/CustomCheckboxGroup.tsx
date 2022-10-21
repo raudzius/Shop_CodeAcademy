@@ -1,7 +1,8 @@
 import {
- Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel,
+ Box, Checkbox, FormControlLabel, FormGroup,
 } from '@mui/material';
 import React from 'react';
+import FieldLabel from './FieldLabel';
 
 export type CheckboxOption = {
   value: string;
@@ -60,19 +61,17 @@ const CustomCheckboxGroup: React.FC<CheckboxGroupProps> = ({
   ) => {
     if (onChange) {
       const newValue: CheckboxOption[] = value
-      ? createControlledValue(value, checked, newOption)
-      : createUncontrolledValue();
+        ? createControlledValue(value, checked, newOption)
+        : createUncontrolledValue();
 
       onChange(e, newValue);
     }
   };
 
   return (
-    <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
-      <FormLabel component="legend" sx={{ letterSpacing: '0.05em', mb: 1 }}>
-        {formLabel}
-      </FormLabel>
-      <FormGroup sx={{ px: 2 }} ref={checkboxGroupRef}>
+    <Box>
+      <FieldLabel>{formLabel}</FieldLabel>
+      <FormGroup sx={{ display: 'flex', flexDirection: 'column', px: 2 }} ref={checkboxGroupRef}>
         {options.map((option) => (
           <FormControlLabel
             key={option.value}
@@ -88,7 +87,7 @@ const CustomCheckboxGroup: React.FC<CheckboxGroupProps> = ({
           />
         ))}
       </FormGroup>
-    </FormControl>
+    </Box>
   );
 };
 

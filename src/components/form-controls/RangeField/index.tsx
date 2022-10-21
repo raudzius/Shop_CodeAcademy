@@ -1,8 +1,10 @@
 import { Box, Slider, Typography } from '@mui/material';
 import * as React from 'react';
+import FieldLabel from '../FieldLabel';
 import { RangeInput, InputContainer, RangeInputProps } from './components';
 
 type RangeFieldProps = {
+  label: string;
   min?: number;
   max?: number;
   value?: NumberRange;
@@ -19,6 +21,7 @@ const DEFAULT_MAX = 100;
 const DEFAULT_RANGE: NumberRange = [DEFAULT_MIN, DEFAULT_MAX];
 
 const RangeField: React.FC<RangeFieldProps> = ({
+  label,
   min,
   max,
   value = DEFAULT_RANGE,
@@ -60,6 +63,7 @@ const RangeField: React.FC<RangeFieldProps> = ({
 
   return (
     <Box>
+      <FieldLabel sx={{ letterSpacing: '0.04em', mb: 1 }}>{label}</FieldLabel>
       <InputContainer>
         <RangeInput
           value={privateMin}
