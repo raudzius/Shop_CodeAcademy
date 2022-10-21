@@ -2,18 +2,16 @@ import React from 'react';
 import ApiService from '../../../services/api-service';
 import { CheckboxOption } from '../../../components/form-controls/CustomCheckboxGroup';
 import useCheckboxFilter from '../hooks/useCheckboxFilter';
-
-type RangeFilter = {
-  bounds: NumberRange;
-  currentRange: NumberRange;
-  urlParamName: string;
-  onChangeCommitted: (newRange: NumberRange) => void;
-};
+import useRangeField from '../hooks/useRangeField';
 
 type ShopContextValue = {
   cups: Cup[];
   filters: {
-    price: RangeFilter;
+    price: {
+      range: NumberRange;
+      onChangeCommitted: (newRange: NumberRange) => void;
+      bounds: NumberRange;
+    };
     categories: {
       options: CheckboxOption[];
       selectedOptions: CheckboxOption[];
@@ -55,30 +53,22 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
     fetchOptions: fetchCategoryOptions,
   });
 
-  const [materialTypes, setMaterialTypes, materialTypesOptions] = useCheckboxFilter(
-    {
-      urlParamName: 'materialTypes',
-      fetchOptions: fetchMaterialTypeOptions,
-    },
-  );
-
-  const [priceFilter, setPriceFilter] = React.useState<RangeFilter>({
-    bounds: [0, 0],
-    currentRange: [0, 0],
-    urlParamName: 'price',
-    onChangeCommitted: (newCurrentRange) => {
-      setPriceFilter((currentPriceFilter) => ({
-        ...currentPriceFilter,
-        currentRange: newCurrentRange,
-      }));
-    },
+  const [materialTypes, setMaterialTypes, materialTypesOptions] = useCheckboxFilter({
+    urlParamName: 'materialTypes',
+    fetchOptions: fetchMaterialTypeOptions,
   });
+
+  const [priceRange, setPriceRange, priceBounds] = useRangeField();
 
   const shopContextValue: ShopContextValue = React.useMemo(
     () => ({
       cups,
       filters: {
-        price: priceFilter,
+        price: {
+          range: priceRange,
+          onChangeCommitted: setPriceRange,
+          bounds: priceBounds,
+        },
         categories: {
           options: categoriesOptions,
           selectedOptions: categories,
@@ -91,22 +81,13 @@ export const ShopContextProvider: React.FC<{ children: React.ReactNode }> = ({ c
         },
       },
     }),
-    [cups, priceFilter, categories, materialTypes],
+    [cups, priceRange, categories, materialTypes],
   );
 
   React.useEffect(() => {
     (async () => {
       const fetchedCups = await ApiService.fetchMany('cups');
-
-      const priceArray = fetchedCups.map((cup) => cup.price).sort((a, b) => a - b);
-      const priceRange: NumberRange = [priceArray[0], priceArray[priceArray.length - 1]];
-
       setCups(fetchedCups);
-      setPriceFilter({
-        ...priceFilter,
-        bounds: priceRange,
-        currentRange: priceRange,
-      });
     })();
   }, []);
 

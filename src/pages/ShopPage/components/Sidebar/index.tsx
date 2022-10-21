@@ -29,7 +29,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isExtendedLayout }) => {
         label="Price"
         min={priceFilter.bounds[0]}
         max={priceFilter.bounds[1]}
-        value={priceFilter.currentRange}
+        value={priceFilter.range}
         onChangeCommitted={(_, newRange) => priceFilter.onChangeCommitted(newRange)}
       />
       <Divider sx={{ my: 2 }} />
