@@ -13,7 +13,7 @@ const ShopPage = () => {
   return (
     <ShopContextProvider>
       <DrawerProvider>
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ maxWidth: 1600, mx: 'auto' }}>
           <ApplicationBar />
           <Sidebar isExtendedLayout={isExtendedLayout} />
           <MainSection isExtendedLayout={isExtendedLayout} />
