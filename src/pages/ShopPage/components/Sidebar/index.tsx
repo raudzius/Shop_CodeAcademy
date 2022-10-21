@@ -32,7 +32,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isExtendedLayout }) => {
         value={priceFilter.currentRange}
         onChangeCommitted={(_, newRange) => priceFilter.onChangeCommitted(newRange)}
       />
-      <Divider />
+      <Divider sx={{ my: 2 }} />
       <CustomCheckboxGroup
         formLabel="Categories"
         name="categories"
@@ -40,7 +40,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isExtendedLayout }) => {
         value={categoriesFilter.selectedOptions}
         onChange={(_, newCategories) => categoriesFilter.onChange(newCategories)}
       />
-      <Divider />
+      <Divider sx={{ my: 2 }} />
       <CustomCheckboxGroup
         formLabel="Material Types"
         name="materialTypes"
